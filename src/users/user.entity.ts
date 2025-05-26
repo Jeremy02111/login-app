@@ -53,4 +53,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   migrationsTableName: 'migrations',
   migrationsRun: true
 }
+
+//Definir y documentar el modelo de datos (diagrama ER).
 */
