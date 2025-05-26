@@ -28,5 +28,5 @@ export class AppModule {}
       database: 'login_app',
       autoLoadEntities: true,
       synchronize: true,
-
+//
       */
