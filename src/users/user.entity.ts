@@ -56,3 +56,4 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
 
 //Definir y documentar el modelo de datos (diagrama ER).
 */
+//se tmrina el modulo de : Configuración de conexión a MySQL y diseño de base de datos
