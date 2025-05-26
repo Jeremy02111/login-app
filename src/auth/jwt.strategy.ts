@@ -20,3 +20,19 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   };
   }
 }
+
+//│   │   │   └── jwt.strategy.ts   👈 Estrategia JWT
+
+
+/*
+
+ async validate(payload: any) {
+  return {
+    userId: payload.sub,
+    username: payload.username,
+    role: payload.role,
+  };
+  }
+}
+
+*/
