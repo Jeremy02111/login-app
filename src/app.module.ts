@@ -22,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
 export class AppModule {}
 
 
+
 /*
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -42,3 +43,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 })
 export class AppModule {}
 */
+
+/*type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'login_app',
+      autoLoadEntities: true,
+      synchronize: true,
+//
+      */
+

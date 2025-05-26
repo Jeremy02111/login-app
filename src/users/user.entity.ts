@@ -19,6 +19,7 @@ export class User {
 }
 
 
+
 //Análisis de Entidad User y Migraciones 🗄️
 
 /*
@@ -53,4 +54,3 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   migrationsRun: true
 }
 */
-
