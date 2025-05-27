@@ -10,6 +10,7 @@ export class AuthService {
     private usersService: UsersService,
     private jwtService: JwtService,
   ) {}
+//Revisión final, despliegue y entrega de documentación
 
    async validateUser(username: string, pass: string): Promise<any> {
     console.log('🟡 Intentando login con:', username, pass);
