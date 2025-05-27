@@ -1,42 +1,105 @@
 import React, { useState } from 'react';
-import { registerUser } from '../services/authService';
+import axios from 'axios';
 
 function RegisterForm({ token, onUserAdded }) {
-  const [formData, setFormData] = useState({
+  const [form, setForm] = useState({
     username: '',
     password: '',
-    full_name: '',
+    full_name: ''
   });
+  const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await registerUser(token, formData);
-      setSuccess('Usuario registrado exitosamente');
+      await axios.post('http://localhost:3000/users/register', form, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setMessage('Usuario registrado exitosamente');
       setError('');
-      setFormData({ username: '', password: '', full_name: '' });
-      onUserAdded();
+      setForm({ username: '', password: '', full_name: '' });
+      onUserAdded && onUserAdded();
     } catch (err) {
-      setError(err.message);
-      setSuccess('');
+      setError('Error al registrar usuario');
+      setMessage('');
     }
   };
 
   return (
-    <div className="card p-4 mb-4 shadow-sm">
-      <h3 className="mb-3">Registrar nuevo usuario</h3>
-      {success && <div className="alert alert-success">{success}</div>}
-      {error && <div className="alert alert-danger">{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <input className="form-control mb-3" name="username" placeholder="Usuario" value={formData.username} onChange={handleChange} required />
-        <input className="form-control mb-3" name="password" type="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} required />
-        <input className="form-control mb-3" name="full_name" placeholder="Nombre completo" value={formData.full_name} onChange={handleChange} required />
-        <button className="btn btn-success w-100" type="submit">Registrar</button>
-      </form>
+    <div
+      className="vh-100 d-flex justify-content-center align-items-center"
+      style={{
+        background: 'linear-gradient(135deg, #1f4068, #2a5298)',
+        backgroundSize: 'cover',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        className="p-5 rounded"
+        style={{
+          width: '400px',
+          backdropFilter: 'blur(12px)',
+          background: 'rgba(255, 255, 255, 0.1)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.25)',
+          color: 'white',
+          border: '1px solid rgba(255,255,255,0.2)',
+        }}
+      >
+        <div className="text-center mb-4">
+          <i className="bi bi-person-plus" style={{ fontSize: '3rem' }}></i>
+          <h4 className="mt-2">Registrar Usuario</h4>
+        </div>
+
+        {message && <div className="alert alert-success text-center">{message}</div>}
+        {error && <div className="alert alert-danger text-center">{error}</div>}
+
+        <form onSubmit={handleSubmit}>
+          <div className="form-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              name="full_name"
+              placeholder="Nombre completo"
+              value={form.full_name}
+              onChange={handleChange}
+              required
+              style={{ backgroundColor: 'transparent', color: 'white' }}
+            />
+          </div>
+          <div className="form-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              name="username"
+              placeholder="Usuario"
+              value={form.username}
+              onChange={handleChange}
+              required
+              style={{ backgroundColor: 'transparent', color: 'white' }}
+            />
+          </div>
+          <div className="form-group mb-4">
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              placeholder="Contraseña"
+              value={form.password}
+              onChange={handleChange}
+              required
+              style={{ backgroundColor: 'transparent', color: 'white' }}
+            />
+          </div>
+          <button type="submit" className="btn btn-info w-100 rounded-pill">
+            Registrar
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
