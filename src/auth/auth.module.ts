@@ -20,21 +20,3 @@ import { JwtStrategy } from './jwt.strategy';
   controllers: [AuthController],
 })
 export class AuthModule {}
-//│   │   ├── auth.module.ts        👈 Configuración del módulo
-
-
-/*
-@Module({
-  imports: [
-    UsersModule,
-    PassportModule,
-    JwtModule.register({
-      secret: 'secretKey123', // Usa algo más seguro en producción
-      signOptions: { expiresIn: '1d' },
-    }),
-  ],
-  providers: [AuthService, JwtStrategy],
-  controllers: [AuthController],
-})
-export class AuthModule {}
-*/

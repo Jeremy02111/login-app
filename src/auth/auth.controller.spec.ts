@@ -16,4 +16,3 @@ describe('AuthController', () => {
     expect(controller).toBeDefined();
   });
 });
-//        ├── auth.controller.ts  👈 Maneja la ruta POST /auth/login
