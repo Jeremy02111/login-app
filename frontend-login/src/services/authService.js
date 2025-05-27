@@ -13,7 +13,7 @@ export const login = async (username, password) => {
     throw new Error('Credenciales inválidas');
   }
 };
-
+//Incluir ejemplos de request/response.
 export const getUsers = async (token) => {
   try {
     const response = await axios.get('http://localhost:3000/users', {
