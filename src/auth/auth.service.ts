@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+//Los decoradores de Swagger para documentar errores se implementan principalmente en:
 
 @Injectable()
 export class AuthService {
