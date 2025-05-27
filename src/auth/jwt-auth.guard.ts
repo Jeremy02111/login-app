@@ -3,3 +3,4 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {}
+//Validar uso correcto de JWT y roles.
