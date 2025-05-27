@@ -1,14 +1,16 @@
-// Importa React y componentes
+
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
-import UserList from './components/UserList';
 import RegisterForm from './components/RegisterForm';
+import UserList from './components/UserList';
 import UserProfile from './components/UserProfile';
+import AdminHome from './components/AdminHome';
+
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [role, setRole] = useState(null);
-  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -20,7 +22,6 @@ function App() {
   const handleLoginSuccess = (newToken) => {
     localStorage.setItem('token', newToken);
     setToken(newToken);
-    setRefresh(!refresh);
   };
 
   const handleLogout = () => {
@@ -29,33 +30,38 @@ function App() {
     setRole(null);
   };
 
-  const refreshUsers = () => setRefresh(!refresh);
+  if (!token) {
+    return (
+      <div className="container mt-5">
+        <LoginForm onLoginSuccess={handleLoginSuccess} />
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <h1>Sistema de Login</h1>
+    <div className="container mt-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="text-primary">Sistema de Login</h1>
+        <button onClick={handleLogout} className="btn btn-danger">Cerrar sesión</button>
+      </div>
 
-      {!token ? (
-        <LoginForm onLoginSuccess={handleLoginSuccess} />
-      ) : (
-        <>
-          <button onClick={handleLogout} style={{ float: 'right' }}>
-            Cerrar sesión
-          </button>
-
-          {role === 'admin' ? (
-            <>
-              <RegisterForm token={token} onUserAdded={refreshUsers} />
-              <UserList token={token} key={refresh} />
-            </>
-          ) : (
-            <UserProfile token={token} />
-          )}
-        </>
-      )}
+      <Routes>
+        {role === 'admin' ? (
+          <>
+            <Route path="/" element={<AdminHome />} />
+            <Route path="/registrar" element={<RegisterForm token={token} onUserAdded={() => {}} />} />
+            <Route path="/clientes" element={<UserList token={token} />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<UserProfile token={token} />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </>
+        )}
+      </Routes>
     </div>
   );
 }
 
 export default App;
-
