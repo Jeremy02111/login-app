@@ -14,9 +14,9 @@ import { RolesGuard } from '../auth/roles.guard';
 import { Role } from '../auth/role.decorator';
 
 
-@ApiTags('users')
-@ApiBearerAuth() // Esto activa el botón Authorize en Swagger
-@Controller('users')
+@ApiTags('users')                // Etiqueta para Swagger
+@ApiBearerAuth()                 //  Habilita autenticación Bearer en Swagger
+@Controller('users')             //  Define la ruta base
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
