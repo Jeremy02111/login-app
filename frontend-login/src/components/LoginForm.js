@@ -14,7 +14,7 @@ function LoginForm({ onLoginSuccess }) {
       setError('');
       onLoginSuccess(token);
     } catch (err) {
-      setError(err.message);
+      setError(err.message); // Muestra "Credenciales inválidas"
     }
   };
 
