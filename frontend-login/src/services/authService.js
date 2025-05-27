@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+//Documentación de API con Swagger
 const API_URL = 'http://localhost:3000/auth';
 //Manejo de errores y respuestas estándar
 export const login = async (username, password) => {
