@@ -19,7 +19,7 @@ export class UsersService {
   async create(createUserDto: CreateUserDto): Promise<User> {
     const { username, password, full_name } = createUserDto;
     const hashedPassword = await bcrypt.hash(password, 10);
-
+//Revisar manejo de contraseñas (hash, salt).
     const user = this.userRepository.create({
       username,
       password: hashedPassword,
