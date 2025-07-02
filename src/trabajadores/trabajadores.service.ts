@@ -10,11 +10,14 @@ export class TrabajadoresService {
     private readonly trabajadorRepository: Repository<Trabajador>,
   ) {}
 
-  findAllActive(): Promise<Trabajador[]> {
-    return this.trabajadorRepository.find({
-      where: { estado_trabajador: 1 },
-      order: { nombre: 'ASC' },
-    });
+  async findAllActive(): Promise<Trabajador[]> {
+    const query = `
+      SELECT id, nombre, cargo 
+      FROM trabajador 
+      WHERE estado_trabajador = 1 
+      ORDER BY nombre ASC;
+    `;
+    return this.trabajadorRepository.query(query);
   }
 
   async findJerarquia(id: number): Promise<any[]> {
@@ -24,7 +27,7 @@ export class TrabajadoresService {
         UNION ALL
         SELECT t.id, t.nombre, t.cargo, t.id_jefe, j.nivel + 1 FROM trabajador t INNER JOIN jerarquia j ON t.id = j.id_jefe
       )
-      SELECT nivel, nombre, cargo FROM jerarquia ORDER BY nivel;
+           SELECT nivel, nombre, cargo FROM jerarquia ORDER BY nivel;
     `;
     return this.trabajadorRepository.query(query, [id]);
   }
