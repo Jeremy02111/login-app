@@ -38,6 +38,13 @@ function AdminHome() {
           >
             <i className="bi bi-people-fill me-2"></i> Ver Todos los Clientes
           </button>
+          <button
+            className="btn btn-outline-info py-3 rounded-pill"
+            onClick={() => navigate('/jerarquia')}
+          >
+            <i className="bi bi-diagram-3-fill me-2"></i> Consultar Jerarquía
+          </button>
+          
         </div>
 
         <div className="mt-4">

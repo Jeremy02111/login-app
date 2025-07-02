@@ -6,6 +6,7 @@ import RegisterForm from './components/RegisterForm';
 import UserList from './components/UserList';
 import UserProfile from './components/UserProfile';
 import AdminHome from './components/AdminHome';
+import Jerarquia from './components/Jerarquia';
 
 
 function App() {
@@ -51,6 +52,9 @@ function App() {
             <Route path="/" element={<AdminHome />} />
             <Route path="/registrar" element={<RegisterForm token={token} onUserAdded={() => {}} />} />
             <Route path="/clientes" element={<UserList token={token} />} />
+
+            <Route path="/jerarquia" element={<Jerarquia token={token} />} />
+
             <Route path="*" element={<Navigate to="/" />} />
           </>
         ) : (
