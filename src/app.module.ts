@@ -22,3 +22,4 @@ import { TrabajadoresModule } from './trabajadores/trabajadores.module';
   ],
 })
 export class AppModule {}
+//todo está subido en el backedn en la ramam de jeremy
